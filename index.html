@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Telepasti News | Portal Berita Terpercaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --red:#c0392b;--red2:#e74c3c;--blue:#1565c0;
+  --dark:#1a1a1a;--text:#1c1c1c;--text2:#444;--muted:#777;
+  --border:#e0e0e0;--bg:#f2f2f2;--card:#fff;--top:#1a2a3a;
+}
+html{font-size:14px;scroll-behavior:smooth;}
+body{font-family:'Noto Sans',sans-serif;color:var(--text);background:var(--bg);}
+a{text-decoration:none;color:inherit;cursor:pointer;}
+button{font-family:'Noto Sans',sans-serif;cursor:pointer;}
+img{max-width:100%;display:block;}
+
+/* ── TOP BAR ── */
+.topbar{background:var(--top);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+.topbar-in{max-width:1200px;margin:0 auto;padding:0 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.top-date{font-size:11.5px;color:#9ec5e8;}
+.top-soc{display:flex;gap:5px;}
+.soc{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:3px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;transition:opacity .2s;user-select:none;}
+.soc:hover{opacity:.75;}
+.s-fb{background:#1877f2;}.s-tw{background:#000;}.s-ig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);}.s-yt{background:#ff0000;}.s-wa{background:#25d366;}.s-tg{background:#0088cc;}
+
+/* ── HEADER ── */
+.header{background:#fff;border-bottom:3px solid var(--red);padding:10px 0;}
+.header-in{max-width:1200px;margin:0 auto;padding:0 14px;display:flex;align-items:center;gap:16px;}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0;cursor:pointer;}
+.logo-box{width:42px;height:42px;background:var(--red);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-weight:900;font-family:'Noto Serif',serif;flex-shrink:0;}
+.logo-name{font-size:24px;font-weight:800;color:var(--red);font-family:'Noto Serif',serif;letter-spacing:-.5px;line-height:1.1;}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:.5px;margin-top:1px;}
+.srch{flex:1;max-width:360px;display:flex;border:1.5px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color .2s;}
+.srch:focus-within{border-color:var(--red);}
+.srch input{flex:1;border:none;outline:none;padding:8px 12px;font-size:13px;color:var(--text);font-family:'Noto Sans',sans-serif;}
+.srch button{background:var(--red);border:none;padding:8px 13px;color:#fff;display:flex;align-items:center;}
+.hdr-date{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap;}
+
+/* ── NAV ── */
+.nav{background:var(--red);position:sticky;top:0;z-index:200;box-shadow:0 2px 6px rgba(0,0,0,.25);}
+.nav-in{max-width:1200px;margin:0 auto;display:flex;overflow-x:auto;}
+.nav-in::-webkit-scrollbar{display:none;}
+.nlink{color:#fff;font-size:13px;font-weight:600;padding:10px 15px;white-space:nowrap;cursor:pointer;border-right:1px solid rgba(255,255,255,.15);transition:background .15s;user-select:none;}
+.nlink:first-child{background:rgba(0,0,0,.28);}
+.nlink:hover,.nlink.active{background:rgba(0,0,0,.32);}
+
+/* ── TICKER ── */
+.ticker{background:#fff;border-bottom:2px solid var(--border);overflow:hidden;}
+.ticker-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;}
+.t-lbl{background:var(--red);color:#fff;font-size:11px;font-weight:800;padding:5px 12px;letter-spacing:.8px;white-space:nowrap;flex-shrink:0;}
+.t-track{flex:1;overflow:hidden;padding:5px 10px;}
+.t-scroll{display:inline-flex;gap:0;animation:tscroll 36s linear infinite;white-space:nowrap;}
+.t-scroll:hover{animation-play-state:paused;}
+.t-item{font-size:12px;color:var(--text2);cursor:pointer;padding:0 4px;}
+.t-item:hover{color:var(--red);}
+.t-dot{color:var(--red);font-size:14px;padding:0 8px;}
+@keyframes tscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1200px;margin:0 auto;padding:14px;}
+.layout{display:grid;grid-template-columns:1fr 288px;gap:16px;align-items:start;}
+
+/* ── SEC HEADER ── */
+.sh{display:flex;align-items:stretch;margin-bottom:12px;border-bottom:2px solid var(--red);}
+.sh h2{background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:6px 14px;text-transform:uppercase;letter-spacing:.3px;}
+.sh-more{margin-left:auto;font-size:12px;color:var(--blue);padding:6px 0;cursor:pointer;}
+.sh-more:hover{color:var(--red);}
+
+/* ── HERO ── */
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.hbig{grid-column:1;grid-row:1/3;border-radius:5px;overflow:hidden;cursor:pointer;position:relative;background:#111;}
+.hbig:hover .tph{transform:scale(1.05);}
+.twrap{overflow:hidden;height:285px;}
+.tph{width:100%;height:285px;display:flex;align-items:center;justify-content:center;font-size:56px;transition:transform .4s;}
+.hbig .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 55%);}
+.hbig .info{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;}
+.cb{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:2px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;}
+.htit{color:#fff;font-size:15px;font-weight:700;line-height:1.38;margin-bottom:5px;}
+.hmeta{color:rgba(255,255,255,.6);font-size:11px;}
+.hsm{border-radius:5px;overflow:hidden;background:var(--card);border:1px solid var(--border);cursor:pointer;transition:box-shadow .15s;}
+.hsm:hover{box-shadow:0 3px 12px rgba(0,0,0,.12);}
+.hsm .twrap{height:128px;}
+.hsm .tph{height:128px;font-size:32px;}
+.hsm-body{padding:8px 10px 10px;}
+.hsm-tit{font-size:12.5px;font-weight:700;line-height:1.38;color:var(--text);margin-bottom:4px;}
+.hsm-tit:hover{color:var(--red);}
+.hsm-meta{font-size:10.5px;color:var(--muted);}
+
+/* ── CARDS ── */
+.ngrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:5px;overflow:hidden;cursor:pointer;transition:box-shadow .15s,transform .15s;}
+.nc:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px);}
+.nc .twrap{height:115px;}
+.nc .tph{height:115px;font-size:34px;}
+.nc:hover .tph{transform:scale(1.06);}
+.ncb{padding:10px;}
+.ncat{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;margin-bottom:3px;letter-spacing:.3px;}
+.ntit{font-size:12.5px;font-weight:700;line-height:1.4;color:var(--text);margin-bottom:5px;}
+.ntit:hover{color:var(--red);}
+.nmeta{font-size:10.5px;color:var(--muted);}
+
+/* ── LIST ── */
+.nlist{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:0 12px;margin-bottom:14px;}
+.nli{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;align-items:flex-start;}
+.nli:last-child{border:none;}
+.nli:hover .ntit{color:var(--red);}
+.nln{font-size:20px;font-weight:900;color:var(--red);opacity:.22;min-width:22px;line-height:1.1;flex-shrink:0;}
+.nli-img{width:80px;height:60px;border-radius:4px;overflow:hidden;flex-shrink:0;}
+.nli-img .tph{width:80px;height:60px;font-size:20px;}
+
+/* ── AD TAPERA ── */
+.ad-tp{background:linear-gradient(90deg,#0c3d6b,#1565c0 50%,#0c3d6b);border-radius:5px;margin-bottom:14px;cursor:pointer;}
+.ad-tp-in{display:flex;align-items:center;gap:14px;padding:14px 20px;}
+.ad-tp-logo{width:52px;height:52px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:var(--red);flex-shrink:0;}
+.ad-tp-txt{color:#fff;flex:1;}
+.ad-tp-txt .name{font-size:22px;font-weight:900;letter-spacing:-.5px;line-height:1;}
+.ad-tp-txt .sub{font-size:10.5px;opacity:.8;margin-top:2px;}
+.ad-tp-c{text-align:center;flex:1;color:#fff;}
+.ad-tp-c h3{font-size:17px;font-weight:900;color:#ffd700;text-shadow:0 1px 4px rgba(0,0,0,.4);}
+.ad-tp-c p{font-size:10.5px;opacity:.8;margin-top:3px;}
+.ad-tp button{background:#ffd700;color:#0c3d6b;border:none;border-radius:4px;padding:10px 18px;font-size:13px;font-weight:800;flex-shrink:0;}
+
+/* ── PARTNER ── */
+.partner{background:linear-gradient(90deg,#0d1b2a,#1b2a3b,#0d1b2a);border-radius:5px;padding:13px 18px;margin-bottom:14px;display:flex;align-items:center;gap:14px;cursor:pointer;}
+.p-logo{width:54px;height:54px;background:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#0d1b2a;flex-shrink:0;}
+.p-info{color:#fff;flex:1;}
+.p-info h3{font-size:15px;font-weight:800;}
+.p-info p{font-size:11px;opacity:.7;margin-top:2px;}
+.p-btn{background:#ffd700;color:#0d1b2a;border:none;border-radius:4px;padding:8px 15px;font-size:12px;font-weight:700;white-space:nowrap;}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:14px;}
+.widget{background:var(--card);border:1px solid var(--border);border-radius:5px;overflow:hidden;}
+.wh{background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:8px 13px;letter-spacing:.5px;text-transform:uppercase;}
+.wb{padding:0 12px;}
+.pi{display:flex;gap:8px;padding:9px 0;border-bottom:1px solid #f5f5f5;cursor:pointer;align-items:flex-start;}
+.pi:last-child{border:none;}
+.pi:hover .ptit{color:var(--red);}
+.pn{font-size:19px;font-weight:900;color:var(--red);opacity:.25;min-width:20px;line-height:1.1;flex-shrink:0;}
+.ptit{font-size:12px;font-weight:600;line-height:1.42;color:var(--text);}
+.pmeta{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.tagcloud{display:flex;flex-wrap:wrap;gap:5px;padding:10px 12px;}
+.tag{font-size:11px;padding:3px 9px;border:1px solid var(--border);border-radius:2px;color:var(--text2);cursor:pointer;transition:all .15s;user-select:none;}
+.tag:hover,.tag.on{background:var(--red);color:#fff;border-color:var(--red);}
+.ad-trading{background:#0a0a18;border-radius:5px;padding:16px;text-align:center;cursor:pointer;}
+.ad-aws{background:#232f3e;border-radius:5px;padding:16px;text-align:center;cursor:pointer;}
+.terkini .pi{border-color:#f0f0f0;}
+
+/* ── MODAL ── */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:20px 12px;}
+.mbg.open{display:flex;align-items:flex-start;justify-content:center;}
+.modal{background:#fff;max-width:800px;width:100%;border-radius:8px;overflow:hidden;margin:auto;position:relative;}
+.mhd{background:var(--red);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;}
+.mhd h2{font-size:15px;font-weight:700;}
+.mclose{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:0 4px;}
+.mbody{padding:22px 24px;}
+.m-cb{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px;}
+.m-tit{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:10px;}
+.m-meta{font-size:12px;color:var(--muted);margin-bottom:16px;display:flex;gap:16px;flex-wrap:wrap;}
+.m-thumb{width:100%;height:250px;border-radius:6px;overflow:hidden;margin-bottom:18px;}
+.m-thumb .tph{height:250px;font-size:80px;}
+.m-txt p{font-size:14px;line-height:1.9;color:var(--text2);margin-bottom:14px;}
+.m-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);}
+.m-tag{font-size:11px;padding:3px 9px;border:1px solid var(--border);border-radius:2px;color:var(--muted);cursor:pointer;}
+.m-tag:hover{background:var(--red);color:#fff;border-color:var(--red);}
+.m-share{margin-top:16px;display:flex;gap:8px;align-items:center;}
+.m-share span{font-size:12px;font-weight:600;color:var(--text2);}
+.m-sb{border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;color:#fff;}
+
+/* ── SEARCH RESULTS ── */
+.sr-box{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:14px;margin-bottom:14px;}
+.sr-box h3{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--red);padding-bottom:8px;border-bottom:1px solid var(--border);}
+.sri{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;align-items:flex-start;}
+.sri:last-child{border:none;}
+.sri:hover .ntit{color:var(--red);}
+.sri-th{width:70px;height:52px;border-radius:4px;overflow:hidden;flex-shrink:0;}
+.sri-th .tph{width:70px;height:52px;font-size:18px;}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);}
+.empty div:first-child{font-size:48px;margin-bottom:12px;}
+
+/* ── FOOTER ── */
+.footer{background:var(--dark);color:#aaa;margin-top:20px;}
+.ft{max-width:1200px;margin:0 auto;padding:26px 14px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:22px;}
+.fc h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;border-bottom:2px solid var(--red);padding-bottom:5px;}
+.fc p{font-size:12px;line-height:1.75;}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.fc ul li a{font-size:12px;color:#aaa;transition:color .15s;cursor:pointer;}
+.fc ul li a:hover{color:#fff;}
+.fb2{border-top:1px solid #333;text-align:center;padding:13px;font-size:12px;}
+.fb2 span{color:var(--red);}
+
+/* COLORS */
+.c1{background:linear-gradient(135deg,#1565c0,#42a5f5);}
+.c2{background:linear-gradient(135deg,#880e4f,#f06292);}
+.c3{background:linear-gradient(135deg,#1b5e20,#66bb6a);}
+.c4{background:linear-gradient(135deg,#4a148c,#ce93d8);}
+.c5{background:linear-gradient(135deg,#bf360c,#ff8a65);}
+.c6{background:linear-gradient(135deg,#006064,#4dd0e1);}
+.c7{background:linear-gradient(135deg,#33691e,#aed581);}
+.c8{background:linear-gradient(135deg,#4e342e,#a1887f);}
+.c9{background:linear-gradient(135deg,#37474f,#90a4ae);}
+.c10{background:linear-gradient(135deg,#f57f17,#fff176);}
+.c11{background:linear-gradient(135deg,#880e4f,#f8bbd0);}
+.c12{background:linear-gradient(135deg,#1a237e,#7986cb);}
+.c13{background:linear-gradient(135deg,#004d40,#80cbc4);}
+.c14{background:linear-gradient(135deg,#3e2723,#bcaaa4);}
+.c15{background:linear-gradient(135deg,#263238,#78909c);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hbig{grid-row:auto;}
+  .ngrid{grid-template-columns:1fr 1fr;}
+  .ft{grid-template-columns:1fr 1fr;}
+  .ad-tp-in{flex-wrap:wrap;}
+}
+@media(max-width:520px){
+  .ngrid{grid-template-columns:1fr;}
+  .ft{grid-template-columns:1fr;}
+  .header-in{flex-wrap:wrap;}
+  .srch{order:3;max-width:100%;width:100%;}
+  .hdr-date{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="top-date" id="topDate"></span>
+    <div class="top-soc">
+      <div class="soc s-fb" onclick="socialClick('Facebook')">f</div>
+      <div class="soc s-tw" onclick="socialClick('Twitter/X')">𝕏</div>
+      <div class="soc s-ig" onclick="socialClick('Instagram')">◉</div>
+      <div class="soc s-yt" onclick="socialClick('YouTube')">▶</div>
+      <div class="soc s-wa" onclick="socialClick('WhatsApp')">●</div>
+      <div class="soc s-tg" onclick="socialClick('Telegram')">✈</div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-in">
+    <div class="logo" onclick="goHome()">
+      <div class="logo-box">T</div>
+      <div>
+        <div class="logo-name">Telepasti</div>
+        <div class="logo-sub">NEWS · TERPERCAYA &amp; AKTUAL</div>
+      </div>
+    </div>
+    <div class="srch">
+      <input type="text" id="srchInput" placeholder="Cari berita..." onkeydown="if(event.key==='Enter')doSearch()"/>
+      <button onclick="doSearch()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+    <div class="hdr-date" id="hdrDate"></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <div class="nlink active" data-cat="home"          onclick="navGo(this)">🏠 Beranda</div>
+    <div class="nlink" data-cat="nasional"             onclick="navGo(this)">Nasional</div>
+    <div class="nlink" data-cat="daerah"               onclick="navGo(this)">Daerah</div>
+    <div class="nlink" data-cat="politik"              onclick="navGo(this)">Politik</div>
+    <div class="nlink" data-cat="hukum"                onclick="navGo(this)">Hukum</div>
+    <div class="nlink" data-cat="ekonomi"              onclick="navGo(this)">Ekonomi</div>
+    <div class="nlink" data-cat="olahraga"             onclick="navGo(this)">Olahraga</div>
+    <div class="nlink" data-cat="hiburan"              onclick="navGo(this)">Hiburan</div>
+    <div class="nlink" data-cat="teknologi"            onclick="navGo(this)">Teknologi</div>
+    <div class="nlink" data-cat="internasional"        onclick="navGo(this)">Internasional</div>
+    <div class="nlink" data-cat="opini"                onclick="navGo(this)">Opini</div>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-in">
+    <div class="t-lbl">⚡ BREAKING</div>
+    <div class="t-track"><div class="t-scroll" id="tickerEl"></div></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="wrap">
+  <div class="layout">
+    <main id="mc"></main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="widget">
+        <div class="wh">🔥 Paling Banyak Dibaca</div>
+        <div class="wb" id="sbPop"></div>
+      </div>
+      <div class="ad-trading" onclick="alert('Indikator Trading — Daftar Gratis!')">
+        <div style="color:#ffd700;font-size:10px;font-weight:700;letter-spacing:1.5px;margin-bottom:6px;">📊 INDIKATOR</div>
+        <div style="color:#fff;font-size:18px;font-weight:900;">TRADING</div>
+        <div style="color:#00e676;font-size:13px;font-weight:700;margin:4px 0 12px;">PALING AKURAT</div>
+        <div style="background:#ffd700;color:#0a0a18;border-radius:3px;padding:7px 16px;font-size:12px;font-weight:700;display:inline-block;">MULAI GRATIS →</div>
+      </div>
+      <div class="ad-aws" onclick="alert('Amazon Web Services — Ready for AI!')">
+        <div style="font-size:30px;margin-bottom:8px;">☁️</div>
+        <div style="color:#ff9900;font-size:15px;font-weight:800;margin-bottom:4px;">Ready for AI?</div>
+        <div style="color:#ccc;font-size:11px;margin-bottom:12px;line-height:1.6;">Run all your AI apps<br>in the cloud</div>
+        <div style="color:#232f3e;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:4px;">aws</div>
+        <div style="background:#ff9900;color:#232f3e;border-radius:3px;padding:7px 16px;font-size:12px;font-weight:700;display:inline-block;">Pelajari Lebih →</div>
+      </div>
+      <div class="widget terkini">
+        <div class="wh">📋 Berita Terkini</div>
+        <div class="wb" id="sbTerkini"></div>
+      </div>
+      <div class="widget">
+        <div class="wh">🏷️ Topik Populer</div>
+        <div class="tagcloud" id="tagCloud"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft">
+    <div class="fc">
+      <h4>Tentang Kami</h4>
+      <p>Telepasti News adalah portal berita online terpercaya yang menyajikan informasi aktual, akurat, dan berimbang dari seluruh penjuru Nusantara sejak 2018.</p>
+    </div>
+    <div class="fc">
+      <h4>Kategori</h4>
+      <ul>
+        <li><a onclick="navCat('nasional')">Nasional</a></li>
+        <li><a onclick="navCat('daerah')">Daerah</a></li>
+        <li><a onclick="navCat('politik')">Politik</a></li>
+        <li><a onclick="navCat('ekonomi')">Ekonomi</a></li>
+        <li><a onclick="navCat('olahraga')">Olahraga</a></li>
+        <li><a onclick="navCat('teknologi')">Teknologi</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a onclick="alert('Hubungi tim iklan kami di iklan@telepasti.com')">Pasang Iklan</a></li>
+        <li><a onclick="alert('Hubungi redaksi untuk kerja sama media')">Kerja Sama</a></li>
+        <li><a onclick="alert('Kirim press release ke redaksi@telepasti.com')">Press Release</a></li>
+        <li><a onclick="alert('Newsletter segera hadir!')">Newsletter</a></li>
+        <li><a onclick="alert('RSS Feed: https://rss.telepasti.com/feed')">RSS Feed</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Kontak Redaksi</h4>
+      <ul>
+        <li><a>📧 redaksi@telepasti.com</a></li>
+        <li><a>📞 (021) 1234-5678</a></li>
+        <li><a>📍 Jakarta, Indonesia</a></li>
+        <li><a onclick="alert('Halaman Profil Redaksi')">Tentang Redaksi</a></li>
+        <li><a onclick="alert('Pedoman Pemberitaan Media Siber')">Pedoman Media</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb2">© 2025 <span>Telepasti News</span> · Semua hak dilindungi undang-undang · Dibuat dengan ❤️ di Indonesia</div>
+</footer>
+
+<!-- MODAL -->
+<div class="mbg" id="mbg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="mhd">
+      <h2 id="mhd-lbl">Berita</h2>
+      <button class="mclose" onclick="closeModal()">×</button>
+    </div>
+    <div class="mbody">
+      <div class="m-cb" id="m-cb"></div>
+      <div class="m-tit" id="m-tit"></div>
+      <div class="m-meta" id="m-meta"></div>
+      <div class="m-thumb" id="m-thumb"></div>
+      <div class="m-txt" id="m-txt"></div>
+      <div class="m-share">
+        <span>Bagikan:</span>
+        <button class="m-sb" style="background:#1877f2;" onclick="alert('Dibagikan ke Facebook!')">Facebook</button>
+        <button class="m-sb" style="background:#000;" onclick="alert('Dibagikan ke X/Twitter!')">X</button>
+        <button class="m-sb" style="background:#25d366;" onclick="alert('Dibagikan ke WhatsApp!')">WhatsApp</button>
+        <button class="m-sb" style="background:#0088cc;" onclick="alert('Dibagikan ke Telegram!')">Telegram</button>
+      </div>
+      <div class="m-tags" id="m-tags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA BERITA
+// ============================================================
+const DB = [
+  // NASIONAL
+  {id:1,cat:'nasional',cl:'Nasional',em:'🏛️',c:'c1',tit:'Presiden Prabowo Resmikan IKN Tahap Pertama dalam Upacara Bersejarah',t:'30 menit lalu',by:'Redaksi',v:'12.4K',tags:['Prabowo','IKN','Nasional'],
+   body:'Presiden Prabowo Subianto meresmikan kawasan Ibu Kota Nusantara (IKN) tahap pertama dalam upacara kenegaraan yang dihadiri ribuan tamu undangan.\n\nPeresmian ini menandai babak baru sejarah Indonesia dalam memindahkan pusat pemerintahan dari Jakarta ke Kalimantan Timur. Berbagai infrastruktur utama telah selesai dibangun termasuk Istana Negara dan Gedung DPR/MPR.\n\nPresiden Prabowo menegaskan IKN bukan sekadar perpindahan ibu kota, melainkan simbol kebangkitan Indonesia sebagai bangsa maju dan berdaulat di abad ke-21.'},
+  {id:2,cat:'nasional',cl:'Nasional',em:'🚔',c:'c2',tit:'Kapolri Tegaskan Komitmen Berantas Mafia Tanah di Seluruh Indonesia',t:'1 jam lalu',by:'Reporter A',v:'8.2K',tags:['Kapolri','Hukum','Nasional'],
+   body:'Kapolri menegaskan komitmen Polri untuk memberantas praktik mafia tanah yang masih marak di berbagai daerah.\n\nSepanjang 2025, Polri telah mengungkap lebih dari 200 kasus mafia tanah dengan total kerugian negara mencapai triliunan rupiah.\n\nPolri akan membentuk satuan tugas khusus yang berkoordinasi langsung dengan Kementerian ATR/BPN dan KPK.'},
+  {id:3,cat:'nasional',cl:'Nasional',em:'📜',c:'c3',tit:'DPR Sahkan Revisi UU ITE, Ancaman Pidana Dikurangi Secara Signifikan',t:'2 jam lalu',by:'Reporter B',v:'6.7K',tags:['DPR','UU ITE','Hukum'],
+   body:'DPR RI mengesahkan revisi UU ITE setelah serangkaian pembahasan panjang.\n\nPoin krusial mencakup pengurangan ancaman hukuman bagi pelanggaran ringan serta penambahan pasal yang melindungi kebebasan berekspresi.\n\nRevisi ini disambut positif pegiat kebebasan pers dan organisasi HAM yang selama ini mengkritik UU ITE sebagai alat pembungkam kritik.'},
+  {id:4,cat:'nasional',cl:'Nasional',em:'🌋',c:'c5',tit:'Gunung Merapi Erupsi, Ribuan Warga di Tiga Kabupaten Dievakuasi Segera',t:'3 jam lalu',by:'Reporter C',v:'15.1K',tags:['Merapi','Bencana','Nasional'],
+   body:'Gunung Merapi kembali erupsi besar. BPBD langsung mengevakuasi ribuan warga di radius berbahaya.\n\nErupsi disertai awan panas sejauh 5 km ke arah barat daya, memaksa warga Sleman, Magelang, dan Boyolali meninggalkan rumah.\n\nPVMBG menaikkan status Merapi ke level IV (Awas), level tertinggi dalam skala aktivitas gunung berapi Indonesia.'},
+  {id:5,cat:'nasional',cl:'Nasional',em:'🏥',c:'c4',tit:'Kemenkes Luncurkan Program Pemeriksaan Kesehatan Gratis Nasional 2025',t:'4 jam lalu',by:'Redaksi',v:'5.3K',tags:['Kesehatan','Kemenkes'],
+   body:'Kementerian Kesehatan meluncurkan program pemeriksaan kesehatan gratis yang menjangkau 514 kabupaten/kota.\n\nProgram ini mencakup pemeriksaan darah lengkap, deteksi dini kanker, dan konsultasi dokter spesialis cuma-cuma.\n\nMenteri Kesehatan menyatakan program ini bagian dari komitmen mewujudkan Indonesia Emas 2045.'},
+  {id:6,cat:'nasional',cl:'Nasional',em:'🎓',c:'c6',tit:'Mendikbud Umumkan Pembaruan Kurikulum Merdeka untuk Tahun Ajaran 2025',t:'5 jam lalu',by:'Redaksi',v:'4.8K',tags:['Pendidikan','Mendikbud'],
+   body:'Mendikbudristek mengumumkan pembaruan implementasi Kurikulum Merdeka untuk tahun ajaran 2025/2026.\n\nPerubahan meliputi metode penilaian berbasis proyek, pengurangan administrasi guru, dan penambahan jam vokasi.\n\nKebijakan ini diharapkan meningkatkan kualitas pendidikan sekaligus menyiapkan generasi muda hadapi era industri 4.0.'},
+
+  // DAERAH
+  {id:7,cat:'daerah',cl:'Daerah',em:'🌉',c:'c7',tit:'Pemkot Surabaya Resmikan Jembatan Kenjeran Senilai Rp 120 Miliar',t:'1 jam lalu',by:'Koresponden Surabaya',v:'9.2K',tags:['Surabaya','Infrastruktur'],
+   body:'Pemerintah Kota Surabaya membuka Jembatan Kenjeran sepanjang 800 meter senilai Rp 120 miliar.\n\nJembatan ini menjadi yang terpanjang di Jawa Timur sekaligus destinasi wisata baru dengan pemandangan Selat Madura.\n\nWali Kota menyatakan jembatan ini bagian dari rencana pengembangan kawasan pesisir utara Surabaya.'},
+  {id:8,cat:'daerah',cl:'Daerah',em:'🌾',c:'c3',tit:'Petani Jawa Timur Sambut Positif Program Subsidi Pupuk Baru Pemerintah',t:'2 jam lalu',by:'Koresponden Jatim',v:'4.1K',tags:['Pertanian','Jawa Timur'],
+   body:'Petani Jawa Timur antusias menyambut program subsidi pupuk baru dari pemerintah pusat.\n\nProgram ini menjamin ketersediaan pupuk bersubsidi bagi petani dengan lahan di bawah dua hektar. Total anggaran Rp 2 triliun untuk Jawa Timur.\n\nKetua Kelompok Tani Makmur Jaya menyatakan program ini sangat membantu menekan biaya produksi.'},
+  {id:9,cat:'daerah',cl:'Daerah',em:'🎭',c:'c11',tit:'Festival Budaya Nusantara 2025 di Bali Dihadiri 50 Ribu Pengunjung Dunia',t:'3 jam lalu',by:'Koresponden Bali',v:'11.3K',tags:['Budaya','Bali','Festival'],
+   body:'Festival Budaya Nusantara 2025 ditutup dengan penampilan spektakuler di Bali.\n\nEvent ini menampilkan 500+ kelompok seni dari 34 provinsi: tarian tradisional, musik daerah, wayang, dan pameran kerajinan.\n\nGubernur Bali menyatakan festival menghasilkan devisa pariwisata senilai Rp 300 miliar.'},
+  {id:10,cat:'daerah',cl:'Daerah',em:'🌊',c:'c6',tit:'Banjir Rob Rendam 500 Rumah di Pantura, Warga Minta Solusi Permanen',t:'4 jam lalu',by:'Koresponden Jateng',v:'7.8K',tags:['Banjir','Pantura'],
+   body:'Banjir rob merendam 500 rumah di pesisir Pantai Utara Jawa, terutama di Demak dan Pekalongan.\n\nKetinggian air mencapai 60-80 sentimeter memaksa warga mengungsi. Kerugian miliaran rupiah.\n\nWarga meminta pemerintah segera bangun tanggul permanen yang selama ini hanya jadi janji kampanye.'},
+  {id:11,cat:'daerah',cl:'Daerah',em:'🏘️',c:'c9',tit:'Pemkab Bogor Bangun 1.000 Unit Rusunawa untuk Warga Berpenghasilan Rendah',t:'5 jam lalu',by:'Koresponden Bogor',v:'3.9K',tags:['Perumahan','Bogor'],
+   body:'Pemkab Bogor merealisasikan 1.000 unit Rusunawa untuk warga berpenghasilan rendah dalam 100 hari kerja Bupati.\n\nRusunawa berlokasi di tiga titik strategis dengan harga mulai Rp 250 juta via KPR FLPP.\n\nBupati menegaskan program ini bukti nyata komitmen pemerintah pastikan setiap warga punya hunian layak.'},
+
+  // POLITIK
+  {id:12,cat:'politik',cl:'Politik',em:'🗳️',c:'c12',tit:'KPU Tetapkan Jadwal Lengkap Pilkada Serentak 2025 di 508 Daerah',t:'30 menit lalu',by:'Reporter Politik',v:'14.2K',tags:['Pilkada','KPU','Politik'],
+   body:'KPU RI menetapkan jadwal lengkap Pilkada Serentak 2025 di 508 kabupaten/kota.\n\nPemungutan suara dijadwalkan 27 November 2025. Kampanye mulai 25 September–23 November 2025.\n\nKetua KPU menegaskan sistem pengawasan lebih ketat untuk mencegah politik uang dan pelanggaran kampanye.'},
+  {id:13,cat:'politik',cl:'Politik',em:'🤝',c:'c1',tit:'Prabowo-Gibran Gelar Rakornas Evaluasi Program 100 Hari Pemerintahan',t:'1 jam lalu',by:'Reporter Politik',v:'10.5K',tags:['Prabowo','Gibran'],
+   body:'Presiden Prabowo dan Wakil Presiden Gibran menggelar rakornas bersama seluruh menteri.\n\nBerbagai program prioritas dibahas: pemberantasan korupsi, ketahanan pangan, swasembada energi, dan peningkatan investasi.\n\nPresiden menekankan setiap kementerian harus tunjukkan hasil konkret yang dirasakan langsung masyarakat.'},
+  {id:14,cat:'politik',cl:'Politik',em:'⚖️',c:'c5',tit:'MK Tolak Gugatan Sengketa Pilkada dari Tiga Daerah Setelah Persidangan Panjang',t:'2 jam lalu',by:'Reporter Politik',v:'6.3K',tags:['MK','Pilkada','Sengketa'],
+   body:'Mahkamah Konstitusi menolak gugatan sengketa hasil Pilkada dari tiga daerah.\n\nMajelis hakim berpendapat bukti yang diajukan tidak cukup kuat buktikan pelanggaran terstruktur, sistematis, dan masif.\n\nMK memerintahkan KPU setempat segera melantik pasangan kepala daerah terpilih.'},
+  {id:15,cat:'politik',cl:'Politik',em:'🏦',c:'c13',tit:'Partai Golkar Gelar Munas Luar Biasa, Pilih Ketua Umum Baru',t:'3 jam lalu',by:'Redaksi',v:'8.7K',tags:['Golkar','Munas'],
+   body:'Golkar menggelar Munas Luar Biasa untuk pilih ketua umum baru.\n\nSejumlah nama tokoh senior dan kader muda beredar sebagai kandidat kuat dengan visi berbeda.\n\nMunas di Jakarta ini dihadiri 1.200+ peserta dari pengurus Golkar seluruh Indonesia.'},
+
+  // HUKUM
+  {id:16,cat:'hukum',cl:'Hukum',em:'🔨',c:'c2',tit:'KPK Tangkap Tangan Kepala Dinas PU dalam OTT Proyek Jalan Rp 45 Miliar',t:'2 jam lalu',by:'Reporter Hukum',v:'18.3K',tags:['KPK','OTT','Korupsi'],
+   body:'KPK berhasil lakukan OTT terhadap Kepala Dinas PU kabupaten di Sulawesi Selatan.\n\nPenyidik mengamankan uang tunai Rp 800 juta diduga suap dari kontraktor pemenang tender.\n\nTiga tersangka ditetapkan: Kepala Dinas, pejabat PPK, dan direktur kontraktor — terancam 10+ tahun penjara.'},
+  {id:17,cat:'hukum',cl:'Hukum',em:'⚖️',c:'c4',tit:'MA Vonis 15 Tahun Penjara Terdakwa Korupsi Dana BOS Rp 30 Miliar',t:'3 jam lalu',by:'Reporter Hukum',v:'9.4K',tags:['MA','Korupsi','Vonis'],
+   body:'MA memperkuat putusan dengan hukuman 15 tahun bagi terdakwa korupsi dana BOS.\n\nTerdakwa, mantan kepala dinas pendidikan kabupaten, terbukti merugikan negara Rp 30,7 miliar.\n\nMA wajibkan uang pengganti Rp 28,5 miliar subsider tiga tahun penjara.'},
+  {id:18,cat:'hukum',cl:'Hukum',em:'🚓',c:'c5',tit:'Polda Metro Bongkar Sindikat Penipuan Investasi Bodong, 12 Tersangka Ditahan',t:'4 jam lalu',by:'Reporter Hukum',v:'12.1K',tags:['Polda','Penipuan'],
+   body:'Polda Metro Jaya membongkar sindikat penipuan online berkedok investasi yang rugikan 5.000+ korban senilai Rp 150 miliar.\n\n12 tersangka ditangkap serentak di empat provinsi. Modus: iming-iming imbal hasil 30% per bulan.\n\nKapolda pastikan aset tersangka dikejar untuk dikembalikan kepada korban.'},
+
+  // EKONOMI
+  {id:19,cat:'ekonomi',cl:'Ekonomi',em:'📈',c:'c10',tit:'IHSG Ditutup Menguat 1.8% ke Level 7.500, Sentimen Global Jadi Penggerak',t:'1 jam lalu',by:'Reporter Ekonomi',v:'7.6K',tags:['IHSG','Saham'],
+   body:'IHSG menguat 1,8% ke level 7.500 didorong sentimen positif global dan data ekonomi domestik.\n\nSektor perbankan, infrastruktur, dan energi jadi penopang utama. Saham BBCA, TLKM, ASII naik di atas 2%.\n\nAnalis proyeksikan IHSG berpotensi lanjut ke 7.700 jika sentimen global tetap kondusif.'},
+  {id:20,cat:'ekonomi',cl:'Ekonomi',em:'💵',c:'c7',tit:'Rupiah Menguat ke Rp15.100 per Dolar, Terkuat dalam Tiga Bulan Terakhir',t:'2 jam lalu',by:'Reporter Ekonomi',v:'5.8K',tags:['Rupiah','Dolar'],
+   body:'Rupiah menguat ke Rp15.100/dolar, posisi terkuat tiga bulan terakhir seiring melemahnya indeks dolar global.\n\nBank Indonesia sebut penguatan didukung surplus neraca perdagangan dan arus masuk modal asing ke obligasi.\n\nGubernur BI perkirakan Rupiah bergerak di Rp15.000–15.500 hingga akhir tahun.'},
+  {id:21,cat:'ekonomi',cl:'Ekonomi',em:'🏭',c:'c1',tit:'Investasi Asing Langsung ke Indonesia Naik 35% di Kuartal II 2025',t:'3 jam lalu',by:'Reporter Ekonomi',v:'4.2K',tags:['Investasi','FDI'],
+   body:'BKPM laporkan FDI ke Indonesia meningkat 35% YoY di kuartal II 2025.\n\nSektor pengolahan, energi terbarukan, dan IT jadi primadona, total USD 12,8 miliar dalam tiga bulan.\n\nMenteri Investasi: capaian ini melampaui target dan cerminkan kepercayaan dunia terhadap Indonesia.'},
+
+  // OLAHRAGA
+  {id:22,cat:'olahraga',cl:'Olahraga',em:'⚽',c:'c3',tit:'Timnas Indonesia Kalahkan Vietnam 3-1, Lolos ke Semifinal Piala Asia 2025',t:'2 jam lalu',by:'Reporter Olahraga',v:'22.5K',tags:['Timnas','Piala Asia'],
+   body:'Timnas Indonesia mengalahkan Vietnam 3-1 di perempat final Piala Asia 2025, Doha Qatar.\n\nGol dicetak Egy Maulana Vikri, Witan Sulaeman, dan Marselino Ferdinan. Gol hiburan Vietnam via Nguyen Van Toan.\n\nIndonesia masuk semifinal Piala Asia untuk pertama kali dalam sejarah sepak bola nasional.'},
+  {id:23,cat:'olahraga',cl:'Olahraga',em:'🏸',c:'c11',tit:'Jonatan Christie Sumbang Emas untuk Indonesia di BWF World Championships 2025',t:'3 jam lalu',by:'Reporter Olahraga',v:'14.7K',tags:['Bulu Tangkis','BWF'],
+   body:'Jonatan Christie raih emas BWF World Championships 2025 usai kalahkan unggulan Denmark.\n\nFinal berlangsung tiga set: 21-18, 18-21, 21-15 dalam 1 jam 24 menit.\n\nPresiden Prabowo langsung menelepon dan ucapkan selamat atas prestasi mengharumkan nama bangsa.'},
+  {id:24,cat:'olahraga',cl:'Olahraga',em:'🏊',c:'c6',tit:'Atlet Renang Indonesia Pecahkan 3 Rekor SEA Games, Raih 5 Emas dalam Sehari',t:'4 jam lalu',by:'Reporter Olahraga',v:'8.3K',tags:['Renang','SEA Games'],
+   body:'Atlet renang Indonesia raih 5 emas dan pecahkan 3 rekor di SEA Games 2025.\n\nIndonesia duduki posisi teratas klasemen renang, melampaui Thailand dan Filipina.\n\nPelatih kepala: ini buah program latihan intensif dua tahun dengan dukungan penuh KONI dan PRIMA.'},
+
+  // HIBURAN
+  {id:25,cat:'hiburan',cl:'Hiburan',em:'🎬',c:'c12',tit:'Film Indonesia "Tanah Merah" Tembus Box Office Asia, Raih 10 Juta Penonton',t:'1 jam lalu',by:'Reporter Hiburan',v:'13.6K',tags:['Film','Box Office'],
+   body:'Film "Tanah Merah" tembus 10 juta penonton di Asia, menjadi film Indonesia dengan penonton terbanyak sepanjang masa.\n\nFilm ini mengangkat perjuangan rakyat melawan penjajahan dengan visual Kalimantan yang memukau.\n\nKeberhasilan ini membuka peluang besar bagi industri film Indonesia di pasar internasional.'},
+  {id:26,cat:'hiburan',cl:'Hiburan',em:'🎵',c:'c2',tit:'Raisa Rilis Album Baru "Fajar", Langsung Trending di Spotify Asia Tenggara',t:'2 jam lalu',by:'Reporter Hiburan',v:'9.8K',tags:['Musik','Raisa'],
+   body:'Raisa merilis album "Fajar" berisi 12 lagu dengan warna jazz, R&B, dan musik tradisional Nusantara.\n\nDalam 24 jam, album ini langsung #1 di chart Spotify Indonesia, Malaysia, dan Singapura.\n\nAlbum ini masuk top 10 di Thailand dan Vietnam sekaligus.'},
+  {id:27,cat:'hiburan',cl:'Hiburan',em:'📺',c:'c5',tit:'Serial Netflix Indonesia "Negeri Dongeng" Ditonton 50 Juta Kali dalam Seminggu',t:'3 jam lalu',by:'Reporter Hiburan',v:'11.2K',tags:['Netflix','Serial'],
+   body:'"Negeri Dongeng" mencatat 50 juta penayangan hanya dalam 7 hari, konten Indonesia pertama masuk top 10 Netflix di 40+ negara.\n\nSerial drama fantasi ini melampaui pencapaian serial Asia lainnya.\n\nNetflix sudah berikan lampu hijau untuk produksi musim kedua, rilis 2026.'},
+
+  // TEKNOLOGI
+  {id:28,cat:'teknologi',cl:'Teknologi',em:'🤖',c:'c4',tit:'Startup AI Indonesia "NusaAI" Raih Pendanaan Rp 500 Miliar dari Investor Global',t:'1 jam lalu',by:'Reporter Teknologi',v:'10.4K',tags:['AI','Startup'],
+   body:'NusaAI menutup pendanaan Seri B senilai Rp 500 miliar dari konsorsium investor AS, Jepang, dan Singapura.\n\nNusaAI kembangkan LLM yang dioptimalkan untuk 700+ bahasa daerah Indonesia.\n\nDana digunakan untuk perluas tim riset, tingkatkan komputasi, dan ekspansi ke Asia Tenggara.'},
+  {id:29,cat:'teknologi',cl:'Teknologi',em:'📱',c:'c1',tit:'Kominfo Luncurkan Super App "Indonesia Digital" Integrasi 200 Layanan Publik',t:'2 jam lalu',by:'Reporter Teknologi',v:'7.9K',tags:['Super App','Digital'],
+   body:'Kemenkominfo meluncurkan super app "Indonesia Digital" yang integrasikan 200+ layanan pemerintah dalam satu platform.\n\nWarga bisa akses layanan kependudukan, pajak, kesehatan, dan pendidikan tanpa banyak aplikasi.\n\nDalam 24 jam pertama, app diunduh 5 juta kali dengan rating 4,6 bintang.'},
+  {id:30,cat:'teknologi',cl:'Teknologi',em:'🛸',c:'c13',tit:'LAPAN Berhasil Luncurkan Satelit Merah Putih 2, Perkuat Konektivitas Nasional',t:'3 jam lalu',by:'Reporter Teknologi',v:'6.1K',tags:['Satelit','LAPAN'],
+   body:'LAPAN berhasil luncurkan satelit Merah Putih 2 dari Tanjung Perak Surabaya.\n\nSatelit 4,8 ton ini sediakan internet cepat untuk seluruh Indonesia termasuk Papua dan kepulauan terluar.\n\nIndonesia jadi negara ke-12 di dunia yang luncurkan satelit komunikasi dengan roket buatan sendiri.'},
+
+  // INTERNASIONAL
+  {id:31,cat:'internasional',cl:'Internasional',em:'🌍',c:'c15',tit:'PBB Serukan Gencatan Senjata Segera di Gaza, Resolusi Didukung 150 Negara',t:'2 jam lalu',by:'Reporter Internasional',v:'16.2K',tags:['Gaza','PBB'],
+   body:'Majelis Umum PBB adopsi resolusi serukan gencatan senjata segera di Gaza.\n\nResolusi didukung 150 negara, 15 menentang, 22 abstain. Indonesia jadi co-sponsor utama.\n\nMeski tidak mengikat secara hukum, dukungan luas ini beri tekanan moral signifikan kepada pihak berkonflik.'},
+  {id:32,cat:'internasional',cl:'Internasional',em:'🇺🇸',c:'c12',tit:'Ekonomi AS Tumbuh 2.8% di Kuartal II 2025, Melampaui Proyeksi Para Ekonom',t:'3 jam lalu',by:'Reporter Internasional',v:'8.4K',tags:['Amerika','Ekonomi Global'],
+   body:'BEA AS laporkan pertumbuhan ekonomi 2,8% secara tahunan di kuartal II 2025, lampaui proyeksi 2,3%.\n\nDidorong konsumsi rumah tangga solid, investasi bisnis meningkat, dan ekspor yang tumbuh.\n\nData positif ini picu spekulasi Fed mungkin tunda penurunan suku bunga yang diperkirakan di kuartal III.'},
+
+  // OPINI
+  {id:33,cat:'opini',cl:'Opini',em:'✍️',c:'c8',tit:'Mengapa IKN Harus Tetap Dilanjutkan Meski Tantangan Besar Menghadang',t:'1 jam lalu',by:'Prof. Bambang Widodo',v:'5.2K',tags:['IKN','Opini','Analisis'],
+   body:'Pemindahan ibu kota ke Nusantara adalah keputusan strategis jangka panjang yang harus dilihat dalam perspektif seratus tahun ke depan.\n\nKritik terhadap IKN sah dan perlu didengar. Namun membunuh proyek di tengah jalan menimbulkan kerugian jauh lebih besar.\n\nYang dibutuhkan bukan perdebatan "lanjut atau tidak", melainkan memastikan pembangunan berjalan akuntabel dan memberi manfaat nyata bagi rakyat.'},
+  {id:34,cat:'opini',cl:'Opini',em:'📰',c:'c14',tit:'Tantangan Jurnalisme di Era Kecerdasan Buatan dan Gelombang Disinformasi',t:'3 jam lalu',by:'Dr. Sari Rahayu',v:'3.7K',tags:['Jurnalisme','AI','Media'],
+   body:'Jurnalis hari ini menghadapi tekanan ganda: AI mulai ambil alih sebagian tugas reportase, sementara disinformasi makin sulit dibendung.\n\nNamun jurnalisme berkualitas justru semakin dibutuhkan — bukan hanya menyampaikan fakta, tetapi memberi konteks dan analisis mendalam.\n\nJawaban bukan menghindar dari teknologi, melainkan memanfaatkannya bijak sambil menjaga nilai dasar: akurasi, keberimbangan, dan keberpihakan pada kepentingan publik.'},
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let curCat = 'home';
+
+// ============================================================
+// TANGGAL
+// ============================================================
+(function(){
+  const now = new Date();
+  const s = now.toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('topDate').textContent = s;
+  document.getElementById('hdrDate').textContent = s;
+})();
+
+// ============================================================
+// TICKER
+// ============================================================
+(function(){
+  const el = document.getElementById('tickerEl');
+  const items = DB.slice(0,14).map(b=>`<span class="t-item" onclick="openArt(${b.id})">${b.tit}</span><span class="t-dot">•</span>`).join('');
+  el.innerHTML = items + items; // duplicate for seamless loop
+})();
+
+// ============================================================
+// NAV
+// ============================================================
+function navGo(el){
+  document.querySelectorAll('.nlink').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  curCat = el.dataset.cat;
+  document.getElementById('srchInput').value='';
+  renderMain(curCat);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function navCat(cat){
+  const el = document.querySelector(`[data-cat="${cat}"]`);
+  if(el) navGo(el);
+}
+function goHome(){ navCat('home'); }
+
+// ============================================================
+// TEMPLATES
+// ============================================================
+function ph(b,h){return `<div class="tph ${b.c}" style="height:${h}px;font-size:${Math.max(20,h*0.2)}px;">${b.em}</div>`;}
+
+function tHeroBig(b){return `
+<div class="hbig" onclick="openArt(${b.id})">
+  <div class="twrap">${ph(b,285)}</div>
+  <div class="ov"></div>
+  <div class="info">
+    <span class="cb">${b.cl}</span>
+    <div class="htit">${b.tit}</div>
+    <div class="hmeta">🕐 ${b.t} &nbsp;·&nbsp; ✍️ ${b.by} &nbsp;·&nbsp; 👁 ${b.v}</div>
+  </div>
+</div>`;}
+
+function tHeroSm(b){return `
+<div class="hsm" onclick="openArt(${b.id})">
+  <div class="twrap">${ph(b,128)}</div>
+  <div class="hsm-body">
+    <span class="cb">${b.cl}</span>
+    <div class="hsm-tit">${b.tit}</div>
+    <div class="hsm-meta">🕐 ${b.t}</div>
+  </div>
+</div>`;}
+
+function tCard(b){return `
+<div class="nc" onclick="openArt(${b.id})">
+  <div class="twrap">${ph(b,115)}</div>
+  <div class="ncb">
+    <div class="ncat">${b.cl}</div>
+    <div class="ntit">${b.tit}</div>
+    <div class="nmeta">🕐 ${b.t} &nbsp;·&nbsp; 👁 ${b.v}</div>
+  </div>
+</div>`;}
+
+function tList(b,n){return `
+<div class="nli" onclick="openArt(${b.id})">
+  ${n?`<div class="nln">${n}</div>`:''}
+  <div class="nli-img">${ph(b,60)}</div>
+  <div>
+    <div class="ncat">${b.cl}</div>
+    <div class="ntit">${b.tit}</div>
+    <div class="nmeta">🕐 ${b.t} &nbsp;·&nbsp; 👁 ${b.v}</div>
+  </div>
+</div>`;}
+
+function tAdTapera(){return `
+<div class="ad-tp">
+  <div class="ad-tp-in">
+    <div class="ad-tp-logo">BP</div>
+    <div class="ad-tp-txt"><div class="name">TAPERA</div><div class="sub">Tabungan Perumahan Rakyat</div></div>
+    <div class="ad-tp-c"><h3>🎉 BIKIN MERANA, JADANYA DIJAMIN!</h3><p>Program tabungan perumahan rakyat terpercaya</p></div>
+    <button onclick="alert('Daftar TAPERA sekarang di tapera.go.id!')">DAFTAR SEKARANG</button>
+  </div>
+</div>`;}
+
+function tPartner(){return `
+<div class="partner">
+  <div class="p-logo">WPMC</div>
+  <div class="p-info"><h3>WPMC — Wahana Prima Media Corporation</h3><p>Media partner terpercaya · Jaringan berita nasional</p></div>
+  <button class="p-btn" onclick="alert('Membuka website WPMC...')">Kunjungi →</button>
+</div>`;}
+
+function tSH(icon,label,cat){
+  const more = cat ? `<span class="sh-more" onclick="navCat('${cat}')">Lihat semua →</span>` : '';
+  return `<div class="sh"><h2>${icon} ${label}</h2>${more}</div>`;
+}
+
+// ============================================================
+// RENDER MAIN
+// ============================================================
+function renderMain(cat){
+  const mc = document.getElementById('mc');
+  if(cat==='home'){ renderHome(mc); }
+  else { renderCat(mc,cat); }
+}
+
+function renderHome(mc){
+  const all  = DB;
+  const top  = all.slice(0,6);
+  const nas  = all.filter(b=>b.cat==='nasional').slice(0,3);
+  const ola  = all.filter(b=>b.cat==='olahraga').slice(0,3);
+  const eko  = all.filter(b=>b.cat==='ekonomi').slice(0,3);
+  const tek  = all.filter(b=>b.cat==='teknologi').slice(0,3);
+  const pop  = [...all].sort(()=>Math.random()-.5).slice(0,5);
+
+  mc.innerHTML = `
+    ${tSH('🔴','Berita Utama','')}
+    <div class="hero-grid">
+      ${tHeroBig(top[0])}
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        ${tHeroSm(top[1])}
+        ${tHeroSm(top[2])}
+      </div>
+    </div>
+
+    ${tAdTapera()}
+
+    ${tSH('📰','Berita Terbaru','nasional')}
+    <div class="ngrid">${top[3]?tCard(top[3]):''}${top[4]?tCard(top[4]):''}${top[5]?tCard(top[5]):''}</div>
+
+    ${tPartner()}
+
+    ${tSH('🏛️','Nasional','nasional')}
+    <div class="ngrid">${nas.map(tCard).join('')}</div>
+
+    ${tSH('🔥','Berita Populer','')}
+    <div class="nlist">${pop.map((b,i)=>tList(b,i+1)).join('')}</div>
+
+    ${tSH('⚽','Olahraga','olahraga')}
+    <div class="ngrid">${ola.map(tCard).join('')}</div>
+
+    ${tSH('💰','Ekonomi','ekonomi')}
+    <div class="ngrid">${eko.map(tCard).join('')}</div>
+
+    ${tSH('💻','Teknologi','teknologi')}
+    <div class="ngrid">${tek.map(tCard).join('')}</div>
+  `;
+}
+
+const catMeta = {
+  nasional:    {icon:'🏛️', label:'Nasional'},
+  daerah:      {icon:'📍', label:'Daerah'},
+  politik:     {icon:'🗳️', label:'Politik'},
+  hukum:       {icon:'⚖️', label:'Hukum'},
+  ekonomi:     {icon:'💰', label:'Ekonomi'},
+  olahraga:    {icon:'⚽', label:'Olahraga'},
+  hiburan:     {icon:'🎬', label:'Hiburan'},
+  teknologi:   {icon:'💻', label:'Teknologi'},
+  internasional:{icon:'🌍', label:'Internasional'},
+  opini:       {icon:'✍️', label:'Opini'},
+};
+
+function renderCat(mc, cat){
+  const m = catMeta[cat] || {icon:'📰',label:cat};
+  const items = DB.filter(b=>b.cat===cat);
+  if(!items.length){
+    mc.innerHTML=`<div class="empty"><div>📭</div><div style="font-size:16px;font-weight:600;margin-bottom:6px;">Belum ada berita</div><div style="font-size:13px;">di kategori ${m.label}</div></div>`;
+    return;
+  }
+  const hero = items[0];
+  const rest = items.slice(1);
+  mc.innerHTML = `
+    ${tSH(m.icon, m.label, '')}
+    <div class="hero-grid" style="grid-template-columns:1fr;margin-bottom:14px;">${tHeroBig(hero)}</div>
+    ${rest.length>=3 ? `<div class="ngrid">${rest.slice(0,3).map(tCard).join('')}</div>` : ''}
+    ${rest.length>3 ? `${tSH('📋','Berita Lainnya','')}<div class="nlist">${rest.slice(3).map((b,i)=>tList(b,i+1)).join('')}</div>` : ''}
+    ${rest.length>0&&rest.length<3 ? `<div class="nlist">${rest.map((b,i)=>tList(b,i+1)).join('')}</div>` : ''}
+  `;
+}
+
+// ============================================================
+// SIDEBAR
+// ============================================================
+function buildSidebar(){
+  // Populer — sort by views
+  const nums = b => parseFloat(b.v.replace('K',''))*1000;
+  const pop = [...DB].sort((a,b2)=>nums(b2)-nums(a)).slice(0,6);
+  document.getElementById('sbPop').innerHTML = pop.map((b,i)=>`
+    <div class="pi" onclick="openArt(${b.id})">
+      <div class="pn">${i+1}</div>
+      <div><div class="ptit">${b.tit}</div><div class="pmeta">🕐 ${b.t} · 👁 ${b.v}</div></div>
+    </div>`).join('');
+
+  // Terkini
+  const terkini = DB.slice(0,7);
+  document.getElementById('sbTerkini').innerHTML = terkini.map(b=>`
+    <div class="pi" onclick="openArt(${b.id})">
+      <div><div class="ptit">${b.tit}</div><div class="pmeta">${b.cl} · 🕐 ${b.t}</div></div>
+    </div>`).join('');
+
+  // Tags
+  const tags = [...new Set(DB.flatMap(b=>b.tags))];
+  document.getElementById('tagCloud').innerHTML = tags.map(tag=>
+    `<span class="tag" onclick="tagSearch('${tag}')">${tag}</span>`).join('');
+}
+
+// ============================================================
+// SEARCH
+// ============================================================
+function doSearch(){
+  const q = document.getElementById('srchInput').value.trim().toLowerCase();
+  if(!q) return;
+  document.querySelectorAll('.nlink').forEach(n=>n.classList.remove('active'));
+  const res = DB.filter(b=>
+    b.tit.toLowerCase().includes(q)||
+    b.cl.toLowerCase().includes(q)||
+    b.tags.some(t=>t.toLowerCase().includes(q))||
+    b.body.toLowerCase().includes(q)
+  );
+  const mc = document.getElementById('mc');
+  if(!res.length){
+    mc.innerHTML=`<div class="sr-box"><h3>🔍 Hasil: "${q}"</h3><div class="empty"><div>😔</div><div>Tidak ada berita yang cocok dengan "<strong>${q}</strong>"</div></div></div>`;
+  } else {
+    mc.innerHTML=`<div class="sr-box">
+      <h3>🔍 Hasil pencarian: "${q}" &nbsp;<span style="color:var(--muted);font-weight:400;font-size:12px;">(${res.length} berita ditemukan)</span></h3>
+      ${res.map(b=>`<div class="sri" onclick="openArt(${b.id})">
+        <div class="sri-th">${ph(b,52)}</div>
+        <div><div class="ncat">${b.cl}</div><div class="ntit">${b.tit}</div><div class="nmeta">🕐 ${b.t} · 👁 ${b.v}</div></div>
+      </div>`).join('')}
+    </div>`;
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function tagSearch(tag){
+  document.getElementById('srchInput').value = tag;
+  // highlight tag
+  document.querySelectorAll('.tag').forEach(t=>{
+    t.classList.toggle('on', t.textContent===tag);
+  });
+  doSearch();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================
+// ARTICLE MODAL
+// ============================================================
+function openArt(id){
+  const b = DB.find(x=>x.id===id);
+  if(!b) return;
+  document.getElementById('mhd-lbl').textContent = `${b.cl} — Telepasti News`;
+  document.getElementById('m-cb').textContent = b.cl;
+  document.getElementById('m-tit').textContent = b.tit;
+  document.getElementById('m-meta').innerHTML = `<span>🕐 ${b.t}</span><span>✍️ ${b.by}</span><span>👁 ${b.v} pembaca</span>`;
+  document.getElementById('m-thumb').innerHTML = ph(b,250);
+  document.getElementById('m-txt').innerHTML = b.body.split('\n\n').map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('m-tags').innerHTML = b.tags.map(tag=>`<span class="m-tag" onclick="closeModal();tagSearch('${tag}')">#${tag}</span>`).join('');
+  document.getElementById('mbg').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('mbg').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// ============================================================
+// SOCIAL
+// ============================================================
+function socialClick(name){
+  alert(`Mengikuti Telepasti News di ${name}!`);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderMain('home');
+buildSidebar();
+</script>
+</body>
+</html>
